@@ -22,7 +22,6 @@ describe('Test calculateTotalPrice', () => {
     test('Si je passe [13, 24, 13] et -2, le résultat doit être 40', () => {
         expect(() => calculateTotalPrice([13, 24, 13], -2).toBe(40));
     });
-    
 
     test('Si je passe un nombre à la place d\'un tableau, une erreur doit être levée', () => {
         expect(() => calculateTotalPrice(18, 20).toThrow('Prices must be an array'));
@@ -64,8 +63,49 @@ describe('Test sendNotification', () => {
 });
 
 describe('Test generatePassword', () => {
-    test('', () =>{
-        
+    test('Si je passe un nombre, le resultat doit être un String de la taille du nombre entré', () => {
+        const result = generatePassword(16);
+        expect(typeof result).toBe("string");
+        expect(result.length).toBe(16);
     });
-});
 
+    test('Si je passe un String au lieu d\'un nombre, une erreur doit être levée', () =>{
+        expect(() => generatePassword("10").toThrow('Length must be a number greater than or equal to 6'));
+    });
+
+    test('Si je passe un nombre inférieur à 6, une erreur doit être levée', () => {
+        expect(() => generatePassword(4).toThrow('Length must be a number greater than or equal to 6'));
+    });
+
+    test('Si l\'option uppercase est désactivée, je ne dois pas avoir de mot de passe contenant de majuscule', () => {
+        const password = generatePassword(255, uppercase= false, numbers = true, specialChars = true)
+        const uppercaseChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        for (let i = 0; i < uppercaseChars.length; i++) {
+            expect(password.includes(uppercaseChars.charAt(i))).toBe(false);
+        }
+    });
+
+    test('Si l\'option numbers est désactivée, je ne dois pas avoir de mot de passe contenant de nombre', () => {
+        const password = generatePassword(255, uppercase = true, numbers = false, specialChars = true)
+        const numberChars = '0123456789';
+        for (let i = 0; i < numberChars.length; i++) {
+            expect(password.includes(numberChars.charAt(i))).toBe(false);
+        }
+    });
+
+    test('Si l\'option specialChars est désactivée, je ne dois pas avoir de mot de passe contenant de caractère spéciaux', () => {
+        const password = generatePassword(255, uppercase = true, numbers = true, specialChars = false);
+        const specialCharacters = '!@#$%^&*()_+[]{}|;:,.<>?';
+        for (let i = 0; i < specialCharacters.length; i++) {
+            expect(password.includes(specialCharacters.charAt(i))).toBe(false);
+        }
+    });
+
+    /**
+     * Puisque l'erreur Error('At least one character type must be enabled') est levée lorsque charPool.length === 0
+     * et que charPool est initialisé tel que let charPool = lowercaseChars; 
+     * et que lowercaseChars est initialisé tel que const lowercaseChars = 'abcdefghijklmnopqrstuvwxyz';
+     * l'erreur ne peut être testée car il n'y a pas de possibilité de la lever
+     */
+    
+});
