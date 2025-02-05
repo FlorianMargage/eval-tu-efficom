@@ -35,5 +35,37 @@ describe('Test calculateTotalPrice', () => {
     test('Si je passe un nombre négatif dans le tableau, une erreur doit être levée', () => {
         expect(() => calculateTotalPrice([50, -20], 20).toThrow('Each price must be a non-negative number'));
     });
-    
 });
+
+describe('Test processPurchase', () => {
+    test('Si je passe [16, 4] et 0.1, le résultat doit être 22', () => {
+        expect(() => processPurchase([16, 4], 0.1).toBe(22));
+    });
+
+    test('Si je passe [12, 38, 46, 4] et 0.5, je devrais recevoir un message `Votre total est de 150.00 €`', () => {
+        const logSpy = jest.spyOn(global.console, 'log');
+
+        result = processPurchase([12, 38, 46, 4], 0.5);
+
+        expect(logSpy).toHaveBeenCalledWith('Notification envoyée : Votre total est de 150.00 €');
+
+        logSpy.mockRestore();
+    });
+});
+
+describe('Test sendNotification', () => {
+    test('Si je passe un String, je devrais recevoir un message avec `Notification envoyée : ` avant', () => {
+        const logSpy = jest.spyOn(global.console, 'log');
+        sendNotification("Test de la fonction");
+        expect(logSpy).toHaveBeenCalledTimes(1);
+        expect(logSpy).toHaveBeenCalledWith('Notification envoyée : Test de la fonction');
+        logSpy.mockRestore();
+    });
+});
+
+describe('Test generatePassword', () => {
+    test('', () =>{
+        
+    });
+});
+
