@@ -1,5 +1,9 @@
 # Évaluation Test Unitaire - 3ème année Efficom
 
+Nom: Margage
+Prénom: Florian
+Github: FlorianMargage
+
 ## Introduction
 
 Cette évaluation a pour objectif de démontrer vos compétences en test unitaire. Elle se déroule en groupe de 2 à 3 étudiants choisis au hasard.

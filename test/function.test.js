@@ -24,15 +24,15 @@ describe('Test calculateTotalPrice', () => {
     });
 
     test('Si je passe un nombre à la place d\'un tableau, une erreur doit être levée', () => {
-        expect(() => calculateTotalPrice(18, 20).toThrow('Prices must be an array'));
+        expect(() => calculateTotalPrice(18, 20)).toThrow('Prices must be an array');
     });
 
     test('Si je passe un String à la place d\'un nombre, une erreur doit être levée', () => {
-        expect(() => calculateTotalPrice([18, 20], "20").toThrow('Tax rate must be a number'));
+        expect(() => calculateTotalPrice([18, 20], "20")).toThrow('Tax rate must be a number');
     });
 
     test('Si je passe un nombre négatif dans le tableau, une erreur doit être levée', () => {
-        expect(() => calculateTotalPrice([50, -20], 20).toThrow('Each price must be a non-negative number'));
+        expect(() => calculateTotalPrice([50, -20], 20)).toThrow('Each price must be a non-negative number');
     });
 });
 
@@ -70,11 +70,11 @@ describe('Test generatePassword', () => {
     });
 
     test('Si je passe un String au lieu d\'un nombre, une erreur doit être levée', () =>{
-        expect(() => generatePassword("10").toThrow('Length must be a number greater than or equal to 6'));
+        expect(() => generatePassword("10")).toThrow('Length must be a number greater than or equal to 6');
     });
 
     test('Si je passe un nombre inférieur à 6, une erreur doit être levée', () => {
-        expect(() => generatePassword(4).toThrow('Length must be a number greater than or equal to 6'));
+        expect(() => generatePassword(4)).toThrow('Length must be a number greater than or equal to 6');
     });
 
     test('Si l\'option uppercase est désactivée, je ne dois pas avoir de mot de passe contenant de majuscule', () => {
